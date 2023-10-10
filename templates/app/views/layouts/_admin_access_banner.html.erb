@@ -1,0 +1,11 @@
+<div class="absolute z-10 top-0 left-0 right-0 flex items-center justify-center gap-x-1 px-6 py-3 bg-gray-mid text-body-sm text-black max-h-14 h-full dark:bg-light-black dark:text-white">
+  <span>Check out the new Solidus</span>
+  <div class="min-w-[120px]">
+    <%= link_to spree.admin_path, class: 'flex items-center gap-x-2 transitions-all duration-200 hover:gap-x-3' do %>
+      <span class="font-sans-md">Admin panel</span>
+      <svg class='w-6 h-6 fill-primary'>
+        <use xlink:href="<%= image_path('remixicon.symbol.svg') %>#ri-arrow-right-line"></use>
+      </svg>
+    <% end %>
+  </div>
+</div>

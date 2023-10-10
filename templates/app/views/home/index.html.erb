@@ -1,7 +1,9 @@
-<%= render 'hero' %>
+<%= render partial: 'featured_products', :locals => { :featured_products => @featured_products } %>
 
-<article>
-  <% cache(cache_key_for_products) do %>
-    <%= render 'products/products', products: @products %>
-  <% end %>
-</article>
+<%= render partial: 'collection', :locals => { :title => "Shop Collection", :products => @shop_collection_products } %>
+
+<%= render partial: 'collections_with_call_to_action', :locals => { :products => @cta_collection_products, :products_text_color => @cta_collection_text_colors } %>
+
+<%= render partial: 'featured_product_banner', :locals => { :featured_product => @new_product_featured, :additional_classes => 'bg-red-500' } %>
+
+<%= render partial: 'collection', :locals => { :title => "New Arrivals", :products => @new_arrivals_collection_products, additional_classes: "!my-20 lg:!my-32" } %>

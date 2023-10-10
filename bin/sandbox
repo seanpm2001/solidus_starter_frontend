@@ -51,9 +51,8 @@ test -n "${username}" && replace_in_database_yml "username" "${username}"
 test -n "${password}" && replace_in_database_yml "password" "${password}"
 
 unbundled bundle add solidus \
-  --github "${SOLIDUS_REPO:-solidusio/solidus}" \
-  --branch "${SOLIDUS_BRANCH:-main}" \
-  --version '> 0.a'
+  --github "${SOLIDUS_REPO:-nebulab/solidus}" \
+  --branch "${SOLIDUS_BRANCH:-paolotatone/update-samples}" \
 
 unbundled bundle exec rake db:drop db:create
 
