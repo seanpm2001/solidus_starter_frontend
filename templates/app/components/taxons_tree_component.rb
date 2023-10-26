@@ -57,8 +57,8 @@ class TaxonsTreeComponent < ViewComponent::Base
             tree(root_taxon: taxon, item_classes: item_classes, current_item_classes: current_item_classes, max_level: max_level - 1)
         end
       end
-
-      safe_join([all_taxon, taxons], "\n")
+ 
+      safe_join([taxons], "\n")
     end
   end
 end

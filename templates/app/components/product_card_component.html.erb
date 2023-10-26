@@ -24,7 +24,7 @@
   id="product_<%= product.id %>"
 >
   <article class="h-full flex flex-col <%= padding_classes %>">
-    <section class="h-full">
+    <section class="product-card_image h-full">
       <%= link_to product_path(product), itemprop: 'url' do %>
         <%= render(
           ImageComponent.new(
