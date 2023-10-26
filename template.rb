@@ -70,6 +70,7 @@ with_log['installing gems'] do
   gem 'truncate_html'
   gem 'view_component', '~> 3.0'
   gem 'tailwindcss-rails'
+  gem 'csso-rails'
 
   gem_group :test do
     # We need to add capybara along with a javascript driver to support the provided system specs.
@@ -107,6 +108,9 @@ with_log['installing files'] do
   copy_file 'config/initializers/canonical_rails.rb'
   copy_file 'config/tailwind.config.js'
   create_file 'app/assets/builds/tailwind.css'
+
+  insert_into_file 'config/environments/test.rb', "\n  config.assets.css_compressor = :csso\n",
+    after: 'config.active_support.disallowed_deprecation_warnings = []'
 
   append_file 'config/initializers/devise.rb', <<~RUBY
     Devise.setup do |config|
