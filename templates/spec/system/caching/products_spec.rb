@@ -3,6 +3,8 @@
 require 'solidus_starter_frontend_spec_helper'
 
 RSpec.describe 'products', type: :system, caching: true do
+  include_context 'featured products'
+  
   let!(:product) { create(:product) }
   let!(:product2) { create(:product) }
   let!(:taxonomy) { create(:taxonomy) }

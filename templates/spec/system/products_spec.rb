@@ -12,11 +12,11 @@ RSpec.describe 'Visiting Products', type: :system, inaccessible: true do
   end
 
   before(:each) do
-    visit root_path
+    visit products_path
   end
 
   it 'should be able to show the shopping cart after adding a product to it' do
-    click_link 'Ruby on Rails Ringer T-Shirt'
+    click_link 'Solidus tote'
     expect(page).to have_content('$19.99')
 
     click_button 'add-to-cart-button'
@@ -28,60 +28,60 @@ RSpec.describe 'Visiting Products', type: :system, inaccessible: true do
     let(:product) { Spree::Product.available.first }
 
     it 'should not use the *_url helper to generate the product links' do
-      visit root_path
+      visit products_path
       expect(page).not_to have_xpath(".//a[@href='#{product_url(product, host: current_host)}']")
     end
 
     it 'should use *_path helper to generate the product links' do
-     visit root_path
+     visit products_path
      expect(page).to have_xpath(".//a[@href='#{product_path(product)}']")
     end
   end
 
   describe 'meta tags and title' do
-    let(:jersey) { Spree::Product.find_by(name: 'Ruby on Rails Baseball Jersey') }
+    let(:hoodie) { Spree::Product.find_by(name: 'Solidus hoodie') }
     let(:metas) do
       {
-        meta_description: 'Brand new Ruby on Rails Jersey',
-        meta_title: 'Ruby on Rails Baseball Jersey Buy High Quality Geek Apparel',
-        meta_keywords: 'ror, jersey, ruby'
+        meta_description: 'Brand new Solidus hoodie',
+        meta_title: 'Solidus hoodie Buy High Quality Geek Apparel',
+        meta_keywords: 'hoodie, cozy'
       }
     end
 
     it 'should return the correct title when displaying a single product' do
-      click_link jersey.name
-      expect(page).to have_title('Ruby on Rails Baseball Jersey - ' + store_name)
+      click_link hoodie.name
+      expect(page).to have_title('Solidus hoodie - ' + store_name)
       within('h1.product-header__title') do
-        expect(page).to have_content('Ruby on Rails Baseball Jersey')
+        expect(page).to have_content('Solidus hoodie')
       end
     end
 
     it 'displays metas' do
-      jersey.update metas
-      click_link jersey.name
-      expect(page).to have_meta(:description, 'Brand new Ruby on Rails Jersey')
-      expect(page).to have_meta(:keywords, 'ror, jersey, ruby')
+      hoodie.update metas
+      click_link hoodie.name
+      expect(page).to have_meta(:description, 'Brand new Solidus hoodie')
+      expect(page).to have_meta(:keywords, 'hoodie, cozy')
     end
 
     it 'displays title if set' do
-      jersey.update metas
-      click_link jersey.name
-      expect(page).to have_title('Ruby on Rails Baseball Jersey Buy High Quality Geek Apparel')
+      hoodie.update metas
+      click_link hoodie.name
+      expect(page).to have_title('Solidus hoodie Buy High Quality Geek Apparel')
     end
 
     it "doesn't use meta_title as heading on page" do
-      jersey.update metas
-      click_link jersey.name
+      hoodie.update metas
+      click_link hoodie.name
       within('h1') do
-        expect(page).to have_content(jersey.name)
-        expect(page).not_to have_content(jersey.meta_title)
+        expect(page).to have_content(hoodie.name)
+        expect(page).not_to have_content(hoodie.meta_title)
       end
     end
 
     it 'uses product name in title when meta_title set to empty string' do
-      jersey.update meta_title: ''
-      click_link jersey.name
-      expect(page).to have_title('Ruby on Rails Baseball Jersey - ' + store_name)
+      hoodie.update meta_title: ''
+      click_link hoodie.name
+      expect(page).to have_title('Solidus hoodie - ' + store_name)
     end
   end
 
@@ -111,7 +111,7 @@ RSpec.describe 'Visiting Products', type: :system, inaccessible: true do
     # Regression tests for https://github.com/spree/spree/issues/2737
     context 'uses руб as the currency symbol' do
       it 'on products page' do
-        visit root_path
+        visit products_path
         within("#product_#{product.id}") do
           within('.price') do
             expect(page).to have_content('19.99 ₽')
@@ -140,7 +140,7 @@ RSpec.describe 'Visiting Products', type: :system, inaccessible: true do
 
   context 'a product with variants' do
     let(:product) do
-      Spree::Product.find_by(name: 'Ruby on Rails Baseball Jersey')
+      Spree::Product.find_by(name: 'Solidus hoodie')
     end
     let(:option_value) { create(:option_value) }
     let!(:variant) { product.variants.create!(price: 5.59) }
@@ -178,7 +178,7 @@ RSpec.describe 'Visiting Products', type: :system, inaccessible: true do
 
   context 'a product with variants, images only for the variants' do
     let(:product) do
-      Spree::Product.find_by(name: 'Ruby on Rails Baseball Jersey')
+      Spree::Product.find_by(name: 'Solidus hoodie')
     end
 
     before do
@@ -192,7 +192,7 @@ RSpec.describe 'Visiting Products', type: :system, inaccessible: true do
     end
 
     it 'should not display no image available' do
-      visit root_path
+      visit products_path
       expect(page).to have_xpath("//img[contains(@src,'blank')]")
     end
   end
@@ -200,8 +200,8 @@ RSpec.describe 'Visiting Products', type: :system, inaccessible: true do
   it 'should be able to hide products without price' do
     expect(page.all('ul.products-grid li').size).to eq(9)
     stub_spree_preferences(show_products_without_price: false)
-    stub_spree_preferences(currency: 'CAN')
-    visit root_path
+    stub_spree_preferences(currency: 'GBP')
+    visit products_path
     expect(page.all('ul.products-grid li').size).to eq(0)
   end
 
@@ -244,11 +244,11 @@ RSpec.describe 'Visiting Products', type: :system, inaccessible: true do
   end
 
   it 'should return the correct title when displaying a single product' do
-    product = Spree::Product.find_by(name: 'Ruby on Rails Baseball Jersey')
+    product = Spree::Product.find_by(name: 'Solidus hoodie')
     click_link product.name
 
     within('h1.product-header__title') do
-      expect(page).to have_content('Ruby on Rails Baseball Jersey')
+      expect(page).to have_content('Solidus hoodie')
     end
   end
 end

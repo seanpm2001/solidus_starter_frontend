@@ -3,13 +3,15 @@
 require 'solidus_starter_frontend_spec_helper'
 
 RSpec.describe 'Automatic promotions', type: :system, js: true do
+  include_context 'featured products'
+
   let!(:store) { create(:store) }
   let!(:country) { create(:country, name: "United States of America", states_required: true) }
   let!(:state) { create(:state, name: "Alabama", country: country) }
   let!(:zone) { create(:zone) }
   let!(:shipping_method) { create(:shipping_method) }
   let!(:payment_method) { create(:check_payment_method) }
-  let!(:product) { create(:product, name: "RoR Mug", price: 20) }
+  let!(:product) { create(:product, name: "Solidus mug set", price: 20) }
 
   let!(:promotion) do
     promotion = Spree::Promotion.create!(name: "$10 off when you spend more than $100", apply_automatically: true)
@@ -32,7 +34,7 @@ RSpec.describe 'Automatic promotions', type: :system, js: true do
 
   context "on the cart page" do
     before do
-      visit root_path
+      visit products_path
       click_link product.name
       click_button "add-to-cart-button"
     end

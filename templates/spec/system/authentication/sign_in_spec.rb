@@ -3,7 +3,7 @@
 require 'solidus_starter_frontend_spec_helper'
 
 RSpec.feature 'Sign In', type: :system do
-  include_context "custom products"
+  include_context "featured products"
   
   background do
     @user = create(:user, email: 'email@person.com', password: 'secret', password_confirmation: 'secret')

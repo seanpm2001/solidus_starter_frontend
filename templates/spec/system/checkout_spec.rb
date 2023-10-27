@@ -757,7 +757,7 @@ RSpec.describe 'Checkout', :js, type: :system, inaccessible: true do
   end
 
   def add_mug_to_cart
-    visit root_path
+    visit products_path
     click_link mug.name
     click_button "add-to-cart-button"
   end

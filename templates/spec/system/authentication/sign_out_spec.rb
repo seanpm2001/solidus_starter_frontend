@@ -3,7 +3,7 @@
 require 'solidus_starter_frontend_spec_helper'
 
 RSpec.feature 'Sign Out', type: :system, js: true do
-  include_context "custom products"
+  include_context "featured products"
   
   given!(:user) do
    create(:user,
