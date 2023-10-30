@@ -9,7 +9,7 @@ class TaxonsTreeComponent < ViewComponent::Base
     current_taxon: nil,
     max_level: 1,
     item_classes: nil,
-    current_item_classes: nil,
+    current_item_classes: 'underline',
     title_classes: nil
   )
     @root_taxon = root_taxon
